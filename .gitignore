@@ -1,0 +1,149 @@
+//UNIVERSIDAD TECNICA DEL NORTE
+//FICA-CIERCOM
+//HENRY LEMA
+//REGULADOR DE MOTOR 00-99
+//DECLARACION DE VARIABLES
+
+int pos;
+int A=13;
+int B=12;
+int C=11;
+int D=10;
+int contador_unidades;
+int contador_decenas;
+int contador=0;
+int pul=0;
+int ad;
+int motor=3;
+int unidades=9;
+int decenas=8;
+
+
+void setup() {
+  // SE DESIGNAN SALIDAS PARA LOS DISPLAYS
+  
+pinMode (A,OUTPUT);
+pinMode (B,OUTPUT);
+pinMode (C,OUTPUT);
+pinMode (D,OUTPUT);
+pinMode (unidades,OUTPUT);
+pinMode (decenas,OUTPUT);
+pinMode (motor,OUTPUT);
+
+}
+
+void loop() {
+  // HACE LA LECTURA DE LA RESISTENCIA VARIABLE CUANDO ESTA EN 0
+
+ad=analogRead(0);
+analogWrite(motor, ad/4);
+delay(50);
+//LIMITE PARA EL GIRO DEL MOTOR
+  ad=map (ad, 0, 1023, 0, 99); 
+  //SE SEPARAN LAS DECENAS  
+      contador_decenas=ad / 10;
+      digitalWrite(unidades,LOW);
+      digitalWrite(decenas,HIGH);
+      // SE INVOCAN Y SE IMPRIMEN LAS DECENAS
+      disp(contador_decenas);
+      delay(50);
+  //SE SEPARAN LAS DECENAS  
+      contador_unidades=ad-(contador_decenas*10);
+      digitalWrite(unidades,HIGH);
+        digitalWrite(decenas,LOW);
+         // SE INVOCAN Y SE IMPRIMEN LAS UNIDADES
+        disp(contador_unidades);
+        delay(50);
+    
+}
+  
+// METODO PARA ENCENDER LOS DISTINTOS SEGEMENTOS DE UN DISPLAY 
+void disp (int numero)
+{
+     switch(numero)
+    {
+    case 0:
+    //0
+digitalWrite(A,LOW);
+digitalWrite(B,LOW);
+digitalWrite(C,LOW);
+digitalWrite(D,LOW);
+delay (200);
+    break; 
+    case 1:
+    //ENCIENDE 1
+digitalWrite(A,HIGH);
+digitalWrite(B,LOW);
+digitalWrite(C,LOW);
+digitalWrite(D,LOW);
+delay (200);
+    break; 
+     case 2:
+     //ENCIENDE 2
+digitalWrite(A,LOW);
+digitalWrite(B,HIGH);
+digitalWrite(C,LOW);
+digitalWrite(D,LOW);
+delay (200);
+    break; 
+    case 3:
+    
+//ENCIENDE 3
+digitalWrite(A,HIGH);
+digitalWrite(B,HIGH);
+digitalWrite(C,LOW);
+digitalWrite(D,LOW);
+delay (200);
+    break; 
+    case 4:
+    //ENCIENDE 4
+digitalWrite(A,LOW);
+digitalWrite(B,LOW);
+digitalWrite(C,HIGH);
+digitalWrite(D,LOW);
+delay (200);
+    break; 
+    case 5:
+    //ENCIENDE 5
+digitalWrite(A,HIGH);
+digitalWrite(B,LOW);
+digitalWrite(C,HIGH);
+digitalWrite(D,LOW);
+delay (200);
+    break; 
+     case 6:
+     
+//EENCIENDE 6
+digitalWrite(A,LOW);
+digitalWrite(B,HIGH);
+digitalWrite(C,HIGH);
+digitalWrite(D,LOW);
+delay (200);
+    break; 
+    case 7:
+    //ENCIENDE 7
+digitalWrite(A,HIGH);
+digitalWrite(B,HIGH);
+digitalWrite(C,HIGH);
+digitalWrite(D,LOW);
+delay (200);
+    break; 
+     case 8:
+     //ENCIENDE 8
+digitalWrite(A,LOW);
+digitalWrite(B,LOW);
+digitalWrite(C,LOW);
+digitalWrite(D,HIGH);
+delay (200);
+    break; 
+    case 9:
+    //ENCIENDE 9
+digitalWrite(A,HIGH);
+digitalWrite(B,LOW);
+digitalWrite(C,LOW);
+digitalWrite(D,HIGH);
+delay (200);
+    break; 
+    }
+}
+
